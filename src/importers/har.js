@@ -22,7 +22,11 @@ module.exports.import = function (rawData) {
 };
 
 function importRequest (request) {
+  const cookiesHeaders = mapImporter(request.cookies, importCookieToHeader);
+  const regularHeaders = mapImporter(request.headers, importHeader);
+
   const id = requestCount++;
+
   return {
     _type: 'request',
     _id: `__REQ_${id}__`,
@@ -31,9 +35,8 @@ function importRequest (request) {
     url: importUrl(request.url),
     method: importMethod(request.method),
     body: importPostData(request.postData),
-    cookies: mapImporter(request.cookies, importCookie),
-    headers: mapImporter(request.headers, importHeader),
     parameters: mapImporter(request.queryString, importQueryString),
+    headers: [...regularHeaders, ...cookiesHeaders],
 
     // Authentication isn't part of HAR, but we should be able to
     // sniff for things like Basic Authentication headers and pull
@@ -50,8 +53,11 @@ function importMethod (method) {
   return method.toUpperCase();
 }
 
-function importCookie (obj) {
-  return removeComment(obj);
+function importCookieToHeader (obj) {
+  return {
+    name: 'Cookie',
+    value: `${obj.name}=${obj.value}`
+  };
 }
 
 function importHeader (obj) {

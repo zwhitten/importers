@@ -1,6 +1,6 @@
 {
   "name": "insomnia-importers",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": "Gregory Schier <gschier1990@gmail.com>",
   "description": "Various data importers for Insomnia REST Client",
   "license": "MIT",
@@ -9,8 +9,9 @@
   },
   "main": "./src/import.js",
   "scripts": {
-    "test": "jest --silent && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "test:watch": "npm run test -- --watch"
+    "test": "jest --silent",
+    "test:travis": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",

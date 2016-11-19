@@ -20,7 +20,6 @@ module.exports.setDefaultsRequest = function (request) {
     method: 'GET',
     parameters: [],
     headers: [],
-    cookies: [],
     authentication: {},
   }, request)
 };

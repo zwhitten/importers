@@ -11,7 +11,6 @@
       "url": "http://requestb.in/api/v1/bins",
       "name": "cURL Import 1",
       "method": "POST",
-      "cookies": [],
       "body": "private=false",
       "parameters": [],
       "headers": [

@@ -21,7 +21,6 @@ describe('setDefaults()', () => {
       method: 'GET',
       parameters: [],
       headers: [],
-      cookies: [],
       authentication: {},
     })
   });

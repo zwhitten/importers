@@ -21,7 +21,6 @@
       "url": "{{ base_url }}/users",
       "name": "Test Request",
       "method": "POST",
-      "cookies": [],
       "body": "{\"foo\": \"bar\"}",
       "parameters": [
         {

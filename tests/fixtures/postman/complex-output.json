@@ -18,7 +18,6 @@
       "url": "{{base_url}}/api/users",
       "name": "{{base_url}}/api/users",
       "method": "POST",
-      "cookies": [],
       "body": "foo=bar",
       "parameters": [],
       "headers": [
@@ -36,7 +35,6 @@
       "url": "{{base_url}}/api/users",
       "name": "Test Request",
       "method": "POST",
-      "cookies": [],
       "body": "hello world!",
       "parameters": [],
       "headers": [],
@@ -49,7 +47,6 @@
       "url": "{{base_url}}/api/users",
       "name": "Test Request",
       "method": "POST",
-      "cookies": [],
       "body": "",
       "parameters": [],
       "headers": [],

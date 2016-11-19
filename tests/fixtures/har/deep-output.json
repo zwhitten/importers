@@ -14,7 +14,6 @@
       "body": "",
       "parameters": [],
       "headers": [],
-      "cookies": [],
       "authentication": {}
     },
     {
@@ -25,27 +24,26 @@
       "name": "HAR Request 2",
       "method": "POST",
       "body": "hello world!",
-      "parameters": [{
-        "name": "foo",
-        "value": "bar"
-      }],
-      "headers": [{
-        "name": "Host",
-        "value": "insomnia.rest"
-      }],
-      "cookies": [{
-        "expires": null,
-        "httpOnly": false,
-        "name": "__cfduid",
-        "secure": false,
-        "value": "df7b43586f071c4aaa79dc8a9de0845771478571055"
-      }, {
-        "expires": null,
-        "httpOnly": false,
-        "name": "_ga",
-        "secure": false,
-        "value": "GA1.2.697086801.1478571058"
-      }],
+      "parameters": [
+        {
+          "name": "foo",
+          "value": "bar"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Host",
+          "value": "insomnia.rest"
+        },
+        {
+          "name": "Cookie",
+          "value": "__cfduid=df7b43586f071c4aaa79dc8a9de0845771478571055"
+        },
+        {
+          "name": "Cookie",
+          "value": "_ga=GA1.2.697086801.1478571058"
+        }
+      ],
       "authentication": {}
     }
   ]

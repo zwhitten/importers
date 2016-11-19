@@ -11,13 +11,6 @@
       "url": "http://localhost:8000/api/v1/send",
       "name": "cURL Import 1",
       "method": "POST",
-      "cookies": [{
-        "expires": null,
-        "httpOnly": false,
-        "name": "NID",
-        "secure": false,
-        "value": "91=iOf1sU9Ovlns9Dzn2Ipz05syr2K4AlZ4Kgp84eRVLf3_6DgcNrkqpWg4lfUvCB5cNxD26t"
-      }],
       "body": "{\"email_id\": \"tem_123\"}",
       "parameters": [],
       "headers": [
@@ -32,6 +25,10 @@
         {
           "name": "another-header",
           "value": "foo"
+        },
+        {
+          "name": "Cookie",
+          "value": "NID=91=iOf1sU9Ovlns9Dzn2Ipz05syr2K4AlZ4Kgp84eRVLf3_6DgcNrkqpWg4lfUvCB5cNxD26t"
         }
       ],
       "authentication": {

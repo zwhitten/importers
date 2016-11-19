@@ -91,25 +91,20 @@ function importArgs (args) {
   const authentication = username ? {username, password} : {};
 
   // Cookies
-  const cookies = [
+  const cookieHeaders = [
     ...(pairs.cookie || []),
     ...(pairs.b || [])
   ].map(str => {
     const name = str.split('=', 1)[0];
     const value = str.replace(`${name}=`, '');
-    return {
-      name,
-      value,
-      expires: null,
-      secure: false,
-      httpOnly: false,
-    }
+    return `Cookie: ${name}=${value}`;
   });
 
   // Headers
   const headers = [
     ...(pairs.header || []),
-    ...(pairs.h || [])
+    ...(pairs.h || []),
+    ...cookieHeaders
   ].map(str => {
     const [name, value] = str.split(/\s*:\s*/);
     return {name, value};
@@ -132,7 +127,6 @@ function importArgs (args) {
     method,
     headers,
     authentication,
-    cookies,
     body,
   };
 }
