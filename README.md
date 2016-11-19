@@ -1,5 +1,7 @@
 # Insomnia Importers
+
 [![TravisCI](https://api.travis-ci.org/getinsomnia/importers.svg?branch=master)](https://travis-ci.org/getinsomnia/importers)
+[![npm version](https://badge.fury.io/js/insomnia-importers.svg)](https://badge.fury.io/js/insomnia-importers)
 [![Coverage Status](https://coveralls.io/repos/github/getinsomnia/importers/badge.svg?branch=master)](https://coveralls.io/github/getinsomnia/importers?branch=master)
 
 This repository contains converters to translate exports into Insomnia 
