@@ -3,10 +3,15 @@
 This repository contains converters to translate exports into Insomnia 
 import format.
 
-Supported Formats:
+Simply feed a data file to it and it will try to convert it to Insomnia v2 export format.
 
-- Insomnia 2.0
+## Supported Formats
+
+These are the currently supported import formats.
+
+- Insomnia v1
 - Postman v2
+- cURL
 - HTTP Archive Format 1.2 (HAR)
 
 ## Command Line Usage
