@@ -10,27 +10,32 @@ const fixtures = fs.readdirSync(fixturesPath);
 
 describe('Fixtures', () => {
   for (const name of fixtures) {
-    it(`imports ${name}`, () => {
-      const dir = path.join(fixturesPath, `./${name}`);
+    const dir = path.join(fixturesPath, `./${name}`);
+    const inputs = fs.readdirSync(dir)
+      .filter(name => !!name.match(/^(.+)-?input\.[^.]+$/));
 
-      const input = fs.readdirSync(dir).find(name => name.indexOf('input.') === 0);
-      const output = fs.readdirSync(dir).find(name => name.indexOf('output.') === 0);
+    for (const input of inputs) {
+      const prefix = input.replace(/-input\.[^.]+/, '');
+      const output = `${prefix}-output.json`;
 
-      expect(typeof input).toBe('string');
-      expect(typeof output).toBe('string');
+      it(`Import ${name} ${prefix}`, () => {
 
-      const inputContents = fs.readFileSync(path.join(dir, input), 'utf8');
-      const outputContents = fs.readFileSync(path.join(dir, output), 'utf8');
+        expect(typeof input).toBe('string');
+        expect(typeof output).toBe('string');
 
-      expect(typeof inputContents).toBe('string');
-      expect(typeof outputContents).toBe('string');
+        const inputContents = fs.readFileSync(path.join(dir, input), 'utf8');
+        const outputContents = fs.readFileSync(path.join(dir, output), 'utf8');
 
-      const actual = importers.import(inputContents);
-      const expected = JSON.parse(outputContents);
+        expect(typeof inputContents).toBe('string');
+        expect(typeof outputContents).toBe('string');
 
-      expected.__export_date = actual.__export_date;
+        const actual = importers.import(inputContents);
+        const expected = JSON.parse(outputContents);
 
-      expect(actual).toEqual(expected);
-    })
+        expected.__export_date = actual.__export_date;
+
+        expect(actual).toEqual(expected);
+      })
+    }
   }
 });

@@ -1,19 +1,15 @@
-const postman = require('./importers/postman');
-const har = require('./importers/har');
-const insomnia1 = require('./importers/insomnia-1');
-const insomnia2 = require('./importers/insomnia-2');
 const utils = require('./utils');
 
-const importers = {
-  [postman.id]: postman,
-  [har.id]: har,
-  [insomnia1.id]: insomnia1,
-  [insomnia2.id]: insomnia2,
-};
+const importers = [
+  require('./importers/insomnia-1'),
+  require('./importers/insomnia-2'),
+  require('./importers/postman'),
+  require('./importers/har'),
+  require('./importers/curl'),
+];
 
 module.exports.import = function (contents) {
-  for (const id of Object.keys(importers)) {
-    const importer = importers[id];
+  for (const importer of importers) {
     const resources = importer.import(contents);
 
     if (resources) {

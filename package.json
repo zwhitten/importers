@@ -1,6 +1,6 @@
 {
   "name": "insomnia-importers",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "Gregory Schier <gschier1990@gmail.com>",
   "description": "Various data importers for Insomnia REST Client",
   "license": "MIT",
@@ -17,7 +17,8 @@
     "url": "git+https://github.com/getinsomnia/importers.git"
   },
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "shell-quote": "^1.6.1"
   },
   "devDependencies": {
     "jest": "^17.0.3"
