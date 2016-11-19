@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const importers = require('../src/importers');
+const importers = require('../src/import');
 const fixturesPath = path.join(__dirname, './fixtures');
 const fixtures = fs.readdirSync(fixturesPath);
 

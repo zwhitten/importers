@@ -1,8 +1,8 @@
-const postman = require('./postman');
-const har = require('./har');
-const insomnia1 = require('./insomnia-1');
-const insomnia2 = require('./insomnia-2');
-const utils = require('../utils');
+const postman = require('./importers/postman');
+const har = require('./importers/har');
+const insomnia1 = require('./importers/insomnia-1');
+const insomnia2 = require('./importers/insomnia-2');
+const utils = require('./utils');
 
 const importers = {
   [postman.id]: postman,
