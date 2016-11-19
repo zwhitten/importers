@@ -1,0 +1,83 @@
+{
+  "variables": [],
+  "info": {
+    "name": "Safety",
+    "_postman_id": "ad9147f7-9ace-8244-c9cf-9a8bba6b90f9",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test Folder",
+      "description": "",
+      "item": [
+        {
+          "name": "Test Request 1",
+          "request": {
+            "url": "{{base_url}}/foo/1",
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": ""
+              },
+              {
+                "key": "Authorization",
+                "value": "bearer {{token}}",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"foo\": \"bar\"}"
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Test Request 2",
+          "request": {
+            "url": "{{base_url}}/document",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "bearer {{token}}",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "foo",
+                  "value": "bar",
+                  "type": "text",
+                  "enabled": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Top Level",
+      "request": {
+        "url": "{{base_url}}",
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
+}

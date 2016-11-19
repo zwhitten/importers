@@ -2,20 +2,26 @@
   "name": "insomnia-importers",
   "version": "0.1.0",
   "author": "Gregory Schier <gschier1990@gmail.com>",
-  "description": "",
+  "description": "Various data importers for Insomnia REST Client",
   "license": "MIT",
+  "bin": {
+    "insomnia-import": "./bin/cli"
+  },
   "scripts": {
-    "test": "jest --silent"
+    "test": "jest --silent",
+    "test:watch": "jest --watch --silent"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/getinsomnia/importers.git"
   },
-  "bugs": {
-    "url": "https://github.com/getinsomnia/importers/issues"
+  "dependencies": {
+    "commander": "^2.9.0"
   },
-  "homepage": "https://github.com/getinsomnia/importers#readme",
   "devDependencies": {
-    "jest": "^17.0.0"
+    "jest": "^17.0.3"
+  },
+  "engines": {
+    "node": ">=6"
   }
 }
