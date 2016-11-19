@@ -1,10 +1,12 @@
 const postman = require('./postman');
 const har = require('./har');
+const insomnia1 = require('./insomnia-1');
 const utils = require('../utils');
 
 const importers = {
   [postman.id]: postman,
   [har.id]: har,
+  [insomnia1.id]: insomnia1,
 };
 
 module.exports.import = function (contents) {

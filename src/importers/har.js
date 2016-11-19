@@ -11,12 +11,20 @@ module.exports.description = 'Importer for HTTP Archive 1.2';
 module.exports.import = function (rawData) {
   requestCount = 1;
 
+  let data;
   try {
-    const data = JSON.parse(rawData);
-    return extractRequests(data).map(importRequest);
+    data = JSON.parse(rawData);
   } catch (e) {
     return null;
   }
+
+  const requests = extractRequests(data);
+  if (!requests.length) {
+    // Didn't find any, so it must not be HAR format
+    return null;
+  }
+
+  return requests.map(importRequest);
 };
 
 function importRequest (request) {
@@ -98,9 +106,14 @@ function extractRequests (harRoot) {
   const requests = [];
 
   const log = harRoot.log;
-  if (!log) {
-    // If there is not "log" property, assume it's the raw request
+  if (!log && harRoot.method && harRoot.url) {
+    // If there is not "log" property, try to use the root object
+    // if it looks like a request
     requests.push(harRoot);
+    return requests;
+  }
+
+  if (!log) {
     return requests;
   }
 

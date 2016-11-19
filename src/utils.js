@@ -26,6 +26,7 @@ module.exports.setDefaultsRequest = function (request) {
 module.exports.setDefaultsRequestGroup = function (requestGroup) {
   return Object.assign({
     name: '',
+    environment: {},
   }, requestGroup)
 };
 
