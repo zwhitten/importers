@@ -5,6 +5,7 @@ import format.
 
 Supported Formats:
 
+- Insomnia 2.0
 - Postman v2
 - HTTP Archive Format 1.2 (HAR)
 
