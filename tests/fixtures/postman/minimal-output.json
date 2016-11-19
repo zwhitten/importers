@@ -5,28 +5,16 @@
   "__export_source": "insomnia.importers:v0.1.0",
   "resources": [
     {
-      "_id": "__GRP_1__",
-      "_type": "request_group",
-      "parentId": "__WORKSPACE_ID__",
-      "name": "First Folder",
-      "environment": {}
-    },
-    {
       "_id": "__REQ_1__",
       "_type": "request",
-      "parentId": "__GRP_1__",
-      "url": "{{base_url}}/api/users",
-      "name": "{{base_url}}/api/users",
-      "method": "POST",
+      "parentId": "__WORKSPACE_ID__",
+      "url": "",
+      "name": "",
+      "method": "GET",
       "cookies": [],
-      "body": "foo=bar",
+      "body": "",
       "parameters": [],
-      "headers": [
-        {
-          "name": "Authorization",
-          "value": "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
-        }
-      ],
+      "headers": [],
       "authentication": {}
     }
   ]

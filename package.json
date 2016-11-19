@@ -9,7 +9,7 @@
   },
   "main": "./src/import.js",
   "scripts": {
-    "test": "jest --silent",
+    "test": "jest --silent && cat ./coverage/lcov.info | coveralls.js",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "shell-quote": "^1.6.1"
   },
   "devDependencies": {
+    "coveralls": "^2.11.15",
     "jest": "^17.0.3"
   },
   "jest": {

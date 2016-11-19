@@ -76,7 +76,9 @@ function importHeader (header) {
 }
 
 function importBody (body) {
-  if (body.mode === 'raw') {
+  if (!body) {
+    return '';
+  } else if (body.mode === 'raw') {
     return importBodyRaw(body.raw)
   } else if (body.mode === 'formdata') {
     return importBodyFormdata(body.formdata)
