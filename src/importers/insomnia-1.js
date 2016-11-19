@@ -1,7 +1,5 @@
 'use strict';
 
-const utils = require('../utils');
-
 let requestCount = 1;
 let requestGroupCount = 1;
 
@@ -39,16 +37,12 @@ function importItems (items, parentId) {
   let resources = [];
 
   for (const item of items) {
-    if (item._type === 'request') {
-      resources.push(importRequestItem(item, parentId))
-    } else if (item._type === 'request_group') {
-      const requestGroup = importRequestGroupItem(item, parentId);
-      resources = [
-        ...resources,
-        requestGroup,
-        ...item.requests.map(item => importRequestItem(item, requestGroup._id))
-      ];
-    }
+    const requestGroup = importRequestGroupItem(item, parentId);
+    resources = [
+      ...resources,
+      requestGroup,
+      ...item.requests.map(item => importRequestItem(item, requestGroup._id))
+    ];
   }
 
   return resources;
@@ -60,12 +54,13 @@ function importRequestGroupItem (item, parentId) {
     environment = item.environments.base;
   }
 
+  const count = requestGroupCount++;
   return {
     _type: 'request_group',
-    _id: `__GRP_${requestGroupCount++}__`,
+    _id: `__GRP_${count}__`,
     parentId,
     environment,
-    name: item.name,
+    name: item.name || `Imported Folder ${count}`,
   }
 }
 
@@ -76,23 +71,22 @@ function importRequestItem (item, parentId) {
     authentication.password = item.authentication.password;
   }
 
-  const headers = item.headers;
+  const headers = item.headers || [];
   if (item.__insomnia && item.__insomnia.format) {
     const contentType = FORMAT_MAP[item.__insomnia.format];
-    if (contentType) {
-      headers.push({name: 'Content-Type', value: contentType});
-    }
+    headers.push({name: 'Content-Type', value: contentType});
   }
 
+  const count = requestCount++;
   return {
     _type: 'request',
-    _id: `__REQ_${requestCount++}__`,
+    _id: `__REQ_${count}__`,
     parentId,
-    name: item.name,
-    url: item.url,
-    method: item.method,
-    body: item.body,
-    parameters: item.params,
+    name: item.name || `Imported HAR ${count}`,
+    url: item.url || '',
+    method: item.method || 'GET',
+    body: item.body || '',
+    parameters: item.params || [],
     headers,
     authentication,
   }

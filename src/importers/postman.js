@@ -70,8 +70,8 @@ function importRequestItem (item, parentId) {
 
 function importHeader (header) {
   return Object.assign({
-    name: header.key || '',
-    value: header.value || '',
+    name: header.key,
+    value: header.value,
   })
 }
 
@@ -101,22 +101,4 @@ function mapImporter (arr, importFn) {
   } else {
     return arr.map(importFn)
   }
-}
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~ //
-// Collection Data Helpers //
-// ~~~~~~~~~~~~~~~~~~~~~~~ //
-
-function getRequestItems (things) {
-  let requestItems = [];
-  for (const thing of things) {
-    if (thing.item) {
-      requestItems = [...requestItems, ...getRequestItems(thing.item)];
-    } else if (thing.request) {
-      requestItems.push(thing);
-    }
-  }
-
-  return requestItems;
 }

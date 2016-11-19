@@ -14,17 +14,11 @@ module.exports.import = function (rawData) {
   let data;
   try {
     data = JSON.parse(rawData);
+    const requests = extractRequests(data);
+    return requests.map(importRequest);
   } catch (e) {
     return null;
   }
-
-  const requests = extractRequests(data);
-  if (!requests.length) {
-    // Didn't find any, so it must not be HAR format
-    return null;
-  }
-
-  return requests.map(importRequest);
 };
 
 function importRequest (request) {
@@ -49,18 +43,10 @@ function importRequest (request) {
 }
 
 function importUrl (url) {
-  if (!url) {
-    return '';
-  } else {
-    return url;
-  }
+  return url;
 }
 
 function importMethod (method) {
-  if (!method) {
-    method = 'GET';
-  }
-
   return method.toUpperCase();
 }
 
@@ -73,7 +59,7 @@ function importHeader (obj) {
 }
 
 function importQueryString (obj) {
-  return removeComment(obj || {});
+  return removeComment(obj);
 }
 
 function importPostData (obj) {
@@ -108,30 +94,15 @@ function extractRequests (harRoot) {
   const requests = [];
 
   const log = harRoot.log;
-  if (!log && harRoot.method && harRoot.url) {
+  if (!log && harRoot.httpVersion && harRoot.method && harRoot.url) {
     // If there is not "log" property, try to use the root object
     // if it looks like a request
     requests.push(harRoot);
     return requests;
   }
 
-  if (!log) {
-    return requests;
-  }
-
-  const entries = log.entries;
-  if (!entries) {
-    throw new Error('Missing "entries" property of "log"')
-  }
-
-  for (const entry of entries) {
-    const request = entry.request;
-
-    if (!request) {
-      throw new Error('Missing "request" property in of "entries"')
-    }
-
-    requests.push(request);
+  for (const entry of log.entries) {
+    requests.push(entry.request);
   }
 
   return requests;

@@ -14,7 +14,7 @@ module.exports.setDefaults = function (obj) {
 module.exports.setDefaultsRequest = function (request) {
   request.method = (request.method || 'GET').toUpperCase();
   return Object.assign({
-    name: 'Imported Request',
+    name: 'Imported',
     url: '',
     body: '',
     method: 'GET',
@@ -27,7 +27,7 @@ module.exports.setDefaultsRequest = function (request) {
 
 module.exports.setDefaultsRequestGroup = function (requestGroup) {
   return Object.assign({
-    name: '',
+    name: 'Imported',
     environment: {},
   }, requestGroup)
 };

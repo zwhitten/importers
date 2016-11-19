@@ -10,7 +10,7 @@
   "main": "./src/import.js",
   "scripts": {
     "test": "jest --silent",
-    "test:watch": "jest --watch --silent"
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,17 @@
   },
   "devDependencies": {
     "jest": "^17.0.3"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branched": 100,
+        "functions": 100,
+        "lines": 100,
+        "statement": 100
+      }
+    }
   },
   "engines": {
     "node": ">=6"

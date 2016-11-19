@@ -39,6 +39,32 @@
 					"response": []
 				}
 			]
-		}
+		},
+    {
+      "name": "Test Request",
+      "request": {
+        "url": "{{base_url}}/api/users",
+        "method": "POST",
+        "body": {
+          "mode": "raw",
+          "raw": "hello world!"
+        },
+        "description": "Request with raw body"
+      },
+      "response": []
+    },
+    {
+      "name": "Test Request",
+      "request": {
+        "url": "{{base_url}}/api/users",
+        "method": "POST",
+        "body": {
+          "mode": "unknown",
+          "unknown": "foo"
+        },
+        "description": "Request with raw body"
+      },
+      "response": []
+    }
 	]
 }
