@@ -37,11 +37,12 @@ insomnia-import /path/to/har-export.json > insomnia-export.json
 ## Programmatic Usage
 
 ```javascript
-const fs = require('fs');
 const importers = require('insomnia-importers')
 
-const input = fs.readFileSync('./my-curl-commands.sh', 'utf8');
-const output = importers.import(input);
+// Convert a Curl command
+const output = importers.import('curl -X POST httsp://insomnia.rest --data "Cool!"')
+
+// Pretty print the result
 console.log(JSON.stringify(output, null, 2));
 ```
 
