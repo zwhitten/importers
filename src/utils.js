@@ -6,6 +6,8 @@ module.exports.setDefaults = function (obj) {
     return module.exports.setDefaultsRequest(obj);
   } else if (obj._type === 'request_group') {
     return module.exports.setDefaultsRequestGroup(obj);
+  } else {
+    return obj;
   }
 };
 
