@@ -1,37 +1,60 @@
 # Insomnia Importers
 
-[![npm version](https://badge.fury.io/js/insomnia-importers.svg)](https://badge.fury.io/js/insomnia-importers)
+[![Insomnia REST Client](https://img.shields.io/badge/maintainer-Insomnia-purple.svg?colorB=6e60cc)](https://insomnia.rest)
+[![Npm Version](https://img.shields.io/npm/v/insomnia-importers.svg)](https://www.npmjs.com/package/insomnia-importers)
 [![license](https://img.shields.io/github/license/getinsomnia/importers.svg)]()
 [![TravisCI](https://api.travis-ci.org/getinsomnia/importers.svg?branch=master)](https://travis-ci.org/getinsomnia/importers)
 [![Coverage Status](https://coveralls.io/repos/github/getinsomnia/importers/badge.svg?branch=master)](https://coveralls.io/github/getinsomnia/importers?branch=master)
 
-This repository contains converters to translate exports into Insomnia 
-import format.
-
-Simply feed a data file to it and it will try to convert it to Insomnia v2 export format.
-
-## Supported Formats
-
-These are the currently supported import formats.
+This repository contains converters to translate popular HTTP data formats to
+Insomnia v2 format.
 
 - Insomnia v1
 - Postman v2
 - cURL
 - HTTP Archive Format 1.2 (HAR)
 
+## Installation
+
+For usage on **command line**, install globally
+
+```bash
+npm install -g insomnia-importers
+```
+
+For programmatic usage, install in project
+ 
+```bash
+npm install --save insomnia-importers
+```
+
 ## Command Line Usage
 
 ```shell
-npm install -g insomnia-importers
-
-insomnia-import /path/to/file > output.json
+insomnia-import /path/to/har-export.json > insomnia-export.json
 ```
 
-## Node Usage
+## Programmatic Usage
 
 ```javascript
+const fs = require('fs');
 const importers = require('insomnia-importers')
 
-const output = importers.import('...');
+const input = fs.readFileSync('./my-curl-commands.sh', 'utf8');
+const output = importers.import(input);
 console.log(JSON.stringify(output, null, 2));
+```
+
+## Running Tests
+
+Run all tests
+
+```shell
+npm test
+```
+
+Run test watcher
+
+```shell
+npm run test:watch
 ```
