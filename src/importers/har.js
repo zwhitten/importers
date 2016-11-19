@@ -28,9 +28,11 @@ module.exports.import = function (rawData) {
 };
 
 function importRequest (request) {
+  const id = requestCount++;
   return {
     _type: 'request',
-    _id: `__REQ_${requestCount++}__`,
+    _id: `__REQ_${id}__`,
+    name: request.comment || `HAR Request ${id}`,
     parentId: '__WORKSPACE_ID__',
     url: importUrl(request.url),
     method: importMethod(request.method),

@@ -14,7 +14,7 @@ module.exports.setDefaults = function (obj) {
 module.exports.setDefaultsRequest = function (request) {
   request.method = (request.method || 'GET').toUpperCase();
   return Object.assign({
-    name: '',
+    name: 'Imported Request',
     url: '',
     body: '',
     method: 'GET',
