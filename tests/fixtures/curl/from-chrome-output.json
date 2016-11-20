@@ -9,7 +9,7 @@
       "_type": "request",
       "parentId": "__WORKSPACE_ID__",
       "url": "http://requestb.in/api/v1/bins",
-      "name": "cURL Import 1",
+      "name": "http://requestb.in/api/v1/bins",
       "method": "POST",
       "body": "private=false",
       "parameters": [],

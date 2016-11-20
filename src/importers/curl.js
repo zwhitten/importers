@@ -4,9 +4,9 @@ const {parse} = require('shell-quote');
 
 let requestCount = 1;
 
-module.exports.id = 'har';
-module.exports.name = 'HAR 1.2';
-module.exports.description = 'Importer for HTTP Archive 1.2';
+module.exports.id = 'curl';
+module.exports.name = 'cURL';
+module.exports.description = 'cURL command line tool';
 
 module.exports.import = function (rawData) {
   requestCount = 1;
@@ -122,7 +122,7 @@ function importArgs (args) {
     _id: `__REQ_${count}__`,
     _type: 'request',
     parentId: '__WORKSPACE_ID__',
-    name: `cURL Import ${count}`,
+    name: url || `cURL Import ${count}`,
     url,
     method,
     headers,

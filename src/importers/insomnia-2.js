@@ -4,7 +4,7 @@ const utils = require('../utils');
 
 module.exports.id = 'insomnia-2';
 module.exports.name = 'Insomnia v2';
-module.exports.description = 'Insomnia 3.0 format. This just returns itself';
+module.exports.description = 'Insomnia 3.0 format';
 
 module.exports.import = function (rawData) {
   let data;

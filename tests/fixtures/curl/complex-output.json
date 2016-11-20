@@ -9,7 +9,7 @@
       "_type": "request",
       "parentId": "__WORKSPACE_ID__",
       "url": "http://localhost:8000/api/v1/send",
-      "name": "cURL Import 1",
+      "name": "http://localhost:8000/api/v1/send",
       "method": "POST",
       "body": "{\"email_id\": \"tem_123\"}",
       "parameters": [],
