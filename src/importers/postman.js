@@ -77,24 +77,50 @@ function importHeader (header) {
 
 function importBody (body) {
   if (!body) {
-    return '';
+    return {};
   } else if (body.mode === 'raw') {
     return importBodyRaw(body.raw)
+  } else if (body.mode === 'urlencoded') {
+    return importBodyFormUrlEncoded(body.urlencoded)
   } else if (body.mode === 'formdata') {
+    // TODO: Handle this as properly as multipart/form-data
     return importBodyFormdata(body.formdata)
   } else {
-    return '';
+    return {};
   }
 }
 
 function importBodyFormdata (formdata) {
-  return formdata.map(({key, value, type, enabled}) => (
-    `${key}=${value}`
-  )).join('&')
+  const params = formdata.map(({key, value, type, enabled}) => ({
+    value,
+    type,
+    name: key,
+    disabled: !enabled,
+  }));
+
+  return {
+    params,
+    mimeType: 'multipart/form-data',
+  }
+}
+
+function importBodyFormUrlEncoded (urlEncoded) {
+  const params = urlEncoded.map(({key, value, enabled}) => ({
+    value,
+    name: key,
+    disabled: !enabled
+  }));
+
+  return {
+    params,
+    mimeType: 'application/x-www-form-urlencoded',
+  }
 }
 
 function importBodyRaw (raw) {
-  return raw;
+  return {
+    text: raw
+  };
 }
 
 function mapImporter (arr, importFn) {

@@ -82,9 +82,12 @@ function importArgs (args) {
   // Build the request //
   // ~~~~~~~~~~~~~~~~~ //
 
-  // Basic properties
+  // Url
   const url = getPairValue(pairs, singletons[0] || '', 'url');
-  const body = getPairValue(pairs, '', 'd', 'data', 'data-binary', 'data-ascii');
+
+  // Body
+  const rawBody = getPairValue(pairs, null, 'd', 'data', 'data-binary', 'data-ascii');
+  const body = rawBody === null ? {} : {text: rawBody};
 
   // Authentication
   const [username, password] = getPairValue(pairs, '', 'u', 'user').split(':');
@@ -114,7 +117,7 @@ function importArgs (args) {
   let method = getPairValue(pairs, '__UNSET__', 'x', 'request').toUpperCase();
   if (method === '__UNSET__') {
     // Method is optional in cURL. It will default to POST if there is a body
-    method = body.length ? 'POST' : 'GET';
+    method = body.text ? 'POST' : 'GET';
   }
 
   const count = requestCount++;

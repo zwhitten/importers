@@ -11,8 +11,35 @@
 			"name": "First Folder",
 			"description": "The first folder",
 			"item": [
+        {
+          "name": "{{base_url}}/api/users",
+          "request": {
+            "url": "{{base_url}}/api/users",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic dXNlcm5hbWU6cGFzc3dvcmQ=",
+                "description": ""
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "foo",
+                  "value": "bar",
+                  "type": "text",
+                  "enabled": true
+                }
+              ]
+            },
+            "description": "First Request"
+          },
+          "response": []
+        },
 				{
-					"name": "{{base_url}}/api/users",
+					"name": "Urlencoded Form Test",
 					"request": {
 						"url": "{{base_url}}/api/users",
 						"method": "POST",
@@ -24,8 +51,8 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
+							"mode": "urlencoded",
+							"urlencoded": [
 								{
 									"key": "foo",
 									"value": "bar",

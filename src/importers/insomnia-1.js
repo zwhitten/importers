@@ -85,7 +85,7 @@ function importRequestItem (item, parentId) {
     name: item.name || `Imported HAR ${count}`,
     url: item.url || '',
     method: item.method || 'GET',
-    body: item.body || '',
+    body: {text: item.body || ''},
     parameters: item.params || [],
     headers,
     authentication,

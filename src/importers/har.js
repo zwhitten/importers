@@ -70,15 +70,19 @@ function importQueryString (obj) {
 
 function importPostData (obj) {
   if (!obj) {
-    return '';
-  } else if (obj.params && obj.params.length) {
-    return obj.params.map(({name, value}) => (
-      `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
-    )).join('&')
-  } else if (obj.text) {
-    return obj.text;
+    return {};
+  }
+
+  if (obj.params && obj.params.length) {
+    const params = obj.params.map(p => ({name: p.name, value: p.value}));
+    return {
+      params,
+      mimeType: obj.mimeType || 'application/x-www-form-urlencoded'
+    }
   } else {
-    return '';
+    return {
+      text: obj.text || ''
+    };
   }
 }
 

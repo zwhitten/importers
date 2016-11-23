@@ -15,7 +15,7 @@ module.exports.import = function (contents) {
     if (resources) {
       return {
         _type: 'export',
-        __export_format: 2,
+        __export_format: 3,
         __export_date: utils.getDateString(),
         __export_source: 'insomnia.importers:v0.1.0',
         resources: resources.map(utils.setDefaults),
