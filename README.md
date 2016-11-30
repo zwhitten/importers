@@ -40,10 +40,10 @@ insomnia-import /path/to/har-export.json > insomnia-export.json
 const importers = require('insomnia-importers')
 
 // Convert a Curl command
-const output = importers.import('curl -X POST httsp://insomnia.rest --data "Cool!"')
+const output = importers.convert('curl -X POST httsp://insomnia.rest --data "Cool!"')
 
 // Pretty print the result
-console.log(JSON.stringify(output, null, 2));
+console.log(JSON.stringify(output.data, null, 2));
 ```
 
 ## Running Tests
