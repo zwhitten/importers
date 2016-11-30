@@ -37,7 +37,7 @@ module.exports.go = function () {
   const fullInputPath = path.resolve(inputPath);
   const fileContents = fs.readFileSync(fullInputPath);
 
-  const result = importers.import(fileContents);
+  const result = importers.convert(fileContents);
   const exportContents = JSON.stringify(result, null, 2);
 
   // ~~~~~~~~~~~~~~~~ //

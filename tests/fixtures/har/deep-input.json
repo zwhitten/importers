@@ -10,7 +10,7 @@
       {
         "request": {
           "method": "POST",
-          "url": "https://insomnia.rest/raw/bar",
+          "url": "",
           "httpVersion": "HTTP/1.1",
           "postData": {}
         }

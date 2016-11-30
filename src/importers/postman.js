@@ -7,7 +7,7 @@ module.exports.description = 'Importer for Postman exports';
 let requestCount = 1;
 let requestGroupCount = 1;
 
-module.exports.import = function (rawData) {
+module.exports.convert = function (rawData) {
   requestCount = 1;
   requestGroupCount = 1;
 

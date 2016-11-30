@@ -8,8 +8,8 @@
       "_id": "__REQ_1__",
       "_type": "request",
       "parentId": "__WORKSPACE_ID__",
-      "url": "https://insomnia.rest/raw/bar",
-      "name": "HAR Request 1",
+      "url": "",
+      "name": "HAR Import 1",
       "method": "POST",
       "body": {
         "text": ""
@@ -23,7 +23,7 @@
       "_type": "request",
       "parentId": "__WORKSPACE_ID__",
       "url": "https://insomnia.rest/foo/bar",
-      "name": "HAR Request 2",
+      "name": "https://insomnia.rest/foo/bar",
       "method": "POST",
       "body": {
         "text": "hello world!"

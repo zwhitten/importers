@@ -8,7 +8,7 @@ module.exports.id = 'har';
 module.exports.name = 'HAR 1.2';
 module.exports.description = 'Importer for HTTP Archive 1.2';
 
-module.exports.import = function (rawData) {
+module.exports.convert = function (rawData) {
   requestCount = 1;
 
   let data;
@@ -25,12 +25,12 @@ function importRequest (request) {
   const cookiesHeaders = mapImporter(request.cookies, importCookieToHeader);
   const regularHeaders = mapImporter(request.headers, importHeader);
 
-  const id = requestCount++;
+  const count = requestCount++;
 
   return {
     _type: 'request',
-    _id: `__REQ_${id}__`,
-    name: request.comment || `HAR Request ${id}`,
+    _id: `__REQ_${count}__`,
+    name: request.comment || request.url || `HAR Import ${count}`,
     parentId: '__WORKSPACE_ID__',
     url: importUrl(request.url),
     method: importMethod(request.method),

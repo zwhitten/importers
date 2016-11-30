@@ -8,17 +8,24 @@ const importers = [
   require('./importers/curl'),
 ];
 
-module.exports.import = function (contents) {
+module.exports.convert = function (contents) {
   for (const importer of importers) {
-    const resources = importer.import(contents);
+    const resources = importer.convert(contents);
 
     if (resources) {
       return {
-        _type: 'export',
-        __export_format: 3,
-        __export_date: utils.getDateString(),
-        __export_source: 'insomnia.importers:v0.1.0',
-        resources: resources.map(utils.setDefaults),
+        type: {
+          id: 'har',
+          name: 'HAR 1.2',
+          description: 'Importer for HTTP Archive 1.2',
+        },
+        data: {
+          _type: 'export',
+          __export_format: 3,
+          __export_date: utils.getDateString(),
+          __export_source: 'insomnia.importers:v0.1.0',
+          resources: resources.map(utils.setDefaults),
+        }
       }
     }
   }

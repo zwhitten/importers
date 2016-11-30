@@ -14,7 +14,7 @@ module.exports.id = 'insomnia-1';
 module.exports.name = 'Insomnia v1';
 module.exports.description = 'Legacy Insomnia format';
 
-module.exports.import = function (rawData) {
+module.exports.convert = function (rawData) {
   requestCount = 1;
   requestGroupCount = 1;
 

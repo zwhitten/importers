@@ -29,12 +29,12 @@ describe('Fixtures', () => {
         expect(typeof inputContents).toBe('string');
         expect(typeof outputContents).toBe('string');
 
-        const actual = importers.import(inputContents);
+        const results = importers.convert(inputContents);
         const expected = JSON.parse(outputContents);
 
-        expected.__export_date = actual.__export_date;
+        expected.__export_date = results.data.__export_date;
 
-        expect(actual).toEqual(expected);
+        expect(results.data).toEqual(expected);
       })
     }
   }

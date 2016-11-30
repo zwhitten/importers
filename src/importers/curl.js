@@ -8,7 +8,7 @@ module.exports.id = 'curl';
 module.exports.name = 'cURL';
 module.exports.description = 'cURL command line tool';
 
-module.exports.import = function (rawData) {
+module.exports.convert = function (rawData) {
   requestCount = 1;
 
   if (!rawData.match(/^\s*curl /)) {
