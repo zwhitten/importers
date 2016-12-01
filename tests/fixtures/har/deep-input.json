@@ -26,6 +26,10 @@
             {
               "name": "Host",
               "value": "insomnia.rest"
+            },
+            {
+              "name": "cookie",
+              "value": "foo=bar"
             }
           ],
           "postData": {

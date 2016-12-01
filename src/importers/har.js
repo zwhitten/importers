@@ -22,8 +22,18 @@ module.exports.convert = function (rawData) {
 };
 
 function importRequest (request) {
-  const cookiesHeaders = mapImporter(request.cookies, importCookieToHeader);
-  const regularHeaders = mapImporter(request.headers, importHeader);
+  const cookieHeaderValue = mapImporter(request.cookies, importCookieToHeaderString).join('; ');
+  const headers = mapImporter(request.headers, importHeader);
+
+  // Convert cookie value to header
+  const existingCookieHeader = headers.find(h => h.name.toLowerCase() === 'cookie');
+  if (cookieHeaderValue && existingCookieHeader) {
+    // Has existing cookie header, so let's update it
+    existingCookieHeader.value += `; ${cookieHeaderValue}`;
+  } else if (cookieHeaderValue) {
+    // No existing cookie header, so let's make a new one
+    headers.push({name: 'Cookie', value: cookieHeaderValue});
+  }
 
   const count = requestCount++;
 
@@ -36,7 +46,7 @@ function importRequest (request) {
     method: importMethod(request.method),
     body: importPostData(request.postData),
     parameters: mapImporter(request.queryString, importQueryString),
-    headers: [...regularHeaders, ...cookiesHeaders],
+    headers: headers,
 
     // Authentication isn't part of HAR, but we should be able to
     // sniff for things like Basic Authentication headers and pull
@@ -53,11 +63,8 @@ function importMethod (method) {
   return method.toUpperCase();
 }
 
-function importCookieToHeader (obj) {
-  return {
-    name: 'Cookie',
-    value: `${obj.name}=${obj.value}`
-  };
+function importCookieToHeaderString (obj) {
+    return `${obj.name}=${obj.value}`
 }
 
 function importHeader (obj) {

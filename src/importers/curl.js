@@ -93,25 +93,34 @@ function importArgs (args) {
   const [username, password] = getPairValue(pairs, '', 'u', 'user').split(':');
   const authentication = username ? {username, password} : {};
 
+  // Headers
+  const headers = [
+    ...(pairs.header || []),
+    ...(pairs.h || [])
+  ].map(str => {
+    const [name, value] = str.split(/\s*:\s*/);
+    return {name, value};
+  });
+
   // Cookies
-  const cookieHeaders = [
+  const cookieHeaderValue = [
     ...(pairs.cookie || []),
     ...(pairs.b || [])
   ].map(str => {
     const name = str.split('=', 1)[0];
     const value = str.replace(`${name}=`, '');
-    return `Cookie: ${name}=${value}`;
-  });
+    return `${name}=${value}`;
+  }).join('; ');
 
-  // Headers
-  const headers = [
-    ...(pairs.header || []),
-    ...(pairs.h || []),
-    ...cookieHeaders
-  ].map(str => {
-    const [name, value] = str.split(/\s*:\s*/);
-    return {name, value};
-  });
+  // Convert cookie value to header
+  const existingCookieHeader = headers.find(h => h.name.toLowerCase() === 'cookie');
+  if (cookieHeaderValue && existingCookieHeader) {
+    // Has existing cookie header, so let's update it
+    existingCookieHeader.value += `; ${cookieHeaderValue}`;
+  } else if (cookieHeaderValue) {
+    // No existing cookie header, so let's make a new one
+    headers.push({name: 'Cookie', value: cookieHeaderValue});
+  }
 
   // Method
   let method = getPairValue(pairs, '__UNSET__', 'x', 'request').toUpperCase();
