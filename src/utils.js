@@ -6,6 +6,8 @@ module.exports.setDefaults = function (obj) {
     return module.exports.setDefaultsRequest(obj);
   } else if (obj._type === 'request_group') {
     return module.exports.setDefaultsRequestGroup(obj);
+  } else if (obj._type === 'environment') {
+    return module.exports.setDefaultsEnvironment(obj);
   } else {
     return obj;
   }
@@ -29,6 +31,13 @@ module.exports.setDefaultsRequestGroup = function (requestGroup) {
     name: 'Imported',
     environment: {},
   }, requestGroup)
+};
+
+module.exports.setDefaultsEnvironment = function (environment) {
+  return Object.assign({
+    name: 'Imported Environment',
+    data: {},
+  }, environment)
 };
 
 module.exports.getDateString = function () {

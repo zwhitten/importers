@@ -2,7 +2,7 @@
 
 module.exports.id = 'postman';
 module.exports.name = 'Postman';
-module.exports.description = 'Importer for Postman exports';
+module.exports.description = 'Importer for Postman collections';
 
 let requestCount = 1;
 let requestGroupCount = 1;
@@ -11,12 +11,17 @@ module.exports.convert = function (rawData) {
   requestCount = 1;
   requestGroupCount = 1;
 
+  let data;
   try {
-    const data = JSON.parse(rawData);
-    return importCollection(data);
+    data = JSON.parse(rawData);
+    if (data.info.schema === 'https://schema.getpostman.com/json/collection/v2.0.0/collection.json') {
+      return importCollection(data);
+    }
   } catch (e) {
-    return null;
+    // Nothing
   }
+
+  return null;
 };
 
 function importCollection (collection) {
@@ -49,7 +54,7 @@ function importFolderItem (item, parentId) {
   return {
     parentId,
     _id: `__GRP_${requestGroupCount++}__`,
-    _type: `request_group`,
+    _type: 'request_group',
     name: item.name,
   }
 }
