@@ -12,6 +12,7 @@
       "name": "HAR Import 1",
       "method": "POST",
       "body": {
+        "mimeType": "",
         "text": ""
       },
       "parameters": [],
@@ -26,6 +27,7 @@
       "name": "https://insomnia.rest/foo/bar",
       "method": "POST",
       "body": {
+        "mimeType": "",
         "text": "hello world!"
       },
       "parameters": [

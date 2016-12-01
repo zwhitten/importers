@@ -81,6 +81,7 @@ function importPostData (obj) {
     }
   } else {
     return {
+      mimeType: obj.mimeType || '',
       text: obj.text || ''
     };
   }
