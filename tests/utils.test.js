@@ -38,7 +38,7 @@ describe('setDefaults()', () => {
   it('should set correct environment defaults', () => {
     expect(utils.setDefaults({_type: 'environment'})).toEqual({
       _type: 'environment',
-      parentId: '__WORKSPACE_ID__',
+      parentId: '__BASE_ENVIRONMENT_ID__',
       name: 'Imported Environment',
       data: {},
     })
