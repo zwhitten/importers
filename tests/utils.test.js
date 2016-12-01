@@ -15,6 +15,7 @@ describe('setDefaults()', () => {
   it('should set correct request defaults', () => {
     expect(utils.setDefaults({_type: 'request'})).toEqual({
       _type: 'request',
+      parentId: '__WORKSPACE_ID__',
       name: 'Imported',
       url: '',
       body: '',
@@ -28,8 +29,18 @@ describe('setDefaults()', () => {
   it('should set correct request_group defaults', () => {
     expect(utils.setDefaults({_type: 'request_group'})).toEqual({
       _type: 'request_group',
+      parentId: '__WORKSPACE_ID__',
       name: 'Imported',
       environment: {},
+    })
+  });
+
+  it('should set correct environment defaults', () => {
+    expect(utils.setDefaults({_type: 'environment'})).toEqual({
+      _type: 'environment',
+      parentId: '__WORKSPACE_ID__',
+      name: 'Imported Environment',
+      data: {},
     })
   });
 });

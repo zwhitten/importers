@@ -16,6 +16,7 @@ module.exports.setDefaults = function (obj) {
 module.exports.setDefaultsRequest = function (request) {
   request.method = (request.method || 'GET').toUpperCase();
   return Object.assign({
+    parentId: '__WORKSPACE_ID__',
     name: 'Imported',
     url: '',
     body: '',
@@ -28,6 +29,7 @@ module.exports.setDefaultsRequest = function (request) {
 
 module.exports.setDefaultsRequestGroup = function (requestGroup) {
   return Object.assign({
+    parentId: '__WORKSPACE_ID__',
     name: 'Imported',
     environment: {},
   }, requestGroup)
@@ -35,6 +37,7 @@ module.exports.setDefaultsRequestGroup = function (requestGroup) {
 
 module.exports.setDefaultsEnvironment = function (environment) {
   return Object.assign({
+    parentId: '__WORKSPACE_ID__',
     name: 'Imported Environment',
     data: {},
   }, environment)
