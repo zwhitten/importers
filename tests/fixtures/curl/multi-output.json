@@ -37,7 +37,10 @@
       "method": "GET",
       "body": {},
       "parameters": [],
-      "headers": [],
+      "headers": [{
+        "name": "Cookie",
+        "value": "foo=bar"
+      }],
       "authentication": {}
     },
     {
