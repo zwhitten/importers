@@ -37,7 +37,7 @@ module.exports.setDefaultsRequestGroup = function (requestGroup) {
 
 module.exports.setDefaultsEnvironment = function (environment) {
   return Object.assign({
-    parentId: '__WORKSPACE_ID__',
+    parentId: '__BASE_ENVIRONMENT_ID__',
     name: 'Imported Environment',
     data: {},
   }, environment)
