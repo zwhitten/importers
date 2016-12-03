@@ -3,6 +3,7 @@ const utils = require('./utils');
 const importers = [
   require('./importers/insomnia-1'),
   require('./importers/insomnia-2'),
+  require('./importers/insomnia-3'),
   require('./importers/postman'),
   require('./importers/postman-env'),
   require('./importers/har'),
