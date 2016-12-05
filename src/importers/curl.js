@@ -132,9 +132,11 @@ function importArgs (args) {
     const [name, value] = str.split('=');
     const item = {name};
     if (value.indexOf('@') === 0) {
-      item.fileName = value.slice(1);
+      item.value = value.slice(1);
+      item.type = 'file';
     } else {
       item.value = value;
+      item.type = 'text';
     }
     return item;
   });
