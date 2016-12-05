@@ -20,6 +20,7 @@ module.exports.convert = function (rawData) {
   // Parse the whole thing into one big tokenized list
   const allArgs = parse(rawData);
 
+
   // ~~~~~~~~~~~~~~~~~~~~~~ //
   // Aggregate the commands //
   // ~~~~~~~~~~~~~~~~~~~~~~ //
@@ -63,7 +64,7 @@ function importArgs (args) {
   for (let i = 1; i < args.length; i++) {
     const arg = args[i];
     if (arg.match(/^-{1,2}[\w\-]+/)) {
-      const name = arg.replace(/^-{1,2}/, '').toLowerCase();
+      const name = arg.replace(/^-{1,2}/, '');
       const value = args[i + 1];
 
       if (!pairs[name]) {
@@ -85,18 +86,14 @@ function importArgs (args) {
   // Url
   const url = getPairValue(pairs, singletons[0] || '', 'url');
 
-  // Body
-  const rawBody = getPairValue(pairs, null, 'd', 'data', 'data-binary', 'data-ascii');
-  const body = rawBody === null ? {} : {text: rawBody};
-
   // Authentication
   const [username, password] = getPairValue(pairs, '', 'u', 'user').split(':');
   const authentication = username ? {username, password} : {};
 
   // Headers
   const headers = [
-    ...(pairs.header || []),
-    ...(pairs.h || [])
+    ...(pairs['header'] || []),
+    ...(pairs['H'] || [])
   ].map(str => {
     const [name, value] = str.split(/\s*:\s*/);
     return {name, value};
@@ -122,11 +119,39 @@ function importArgs (args) {
     headers.push({name: 'Cookie', value: cookieHeaderValue});
   }
 
+  // Body (Text or Blob)
+  const textBody = getPairValue(pairs, null, 'd', 'data', 'data-raw', 'data-urlencode', 'data-binary', 'data-ascii');
+  const contentTypeHeader = headers.find(h => h.name.toLowerCase() === 'content-type');
+  const mimeType = contentTypeHeader ? contentTypeHeader.value.split(';')[0] : null;
+
+  // Body (Multipart Form Data)
+  const formParams = [
+    ...(pairs['form'] || []),
+    ...(pairs['F'] || [])
+  ].map(str => {
+    const [name, value] = str.split('=');
+    const item = {name};
+    if (value.indexOf('@') === 0) {
+      item.fileName = value.slice(1);
+    } else {
+      item.value = value;
+    }
+    return item;
+  });
+
+  // Body
+  let body = mimeType ? {mimeType: mimeType} : {};
+  if (textBody) {
+    body.text = textBody;
+  } else if (formParams.length) {
+    body.params = formParams;
+    body.mimeType = mimeType || 'multipart/form-data';
+  }
+
   // Method
-  let method = getPairValue(pairs, '__UNSET__', 'x', 'request').toUpperCase();
+  let method = getPairValue(pairs, '__UNSET__', 'X', 'request').toUpperCase();
   if (method === '__UNSET__') {
-    // Method is optional in cURL. It will default to POST if there is a body
-    method = body.text ? 'POST' : 'GET';
+    method = (body.text || body.params) ? 'POST' : 'GET';
   }
 
   const count = requestCount++;

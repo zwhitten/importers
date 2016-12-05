@@ -12,6 +12,7 @@
       "name": "http://requestb.in/api/v1/bins",
       "method": "POST",
       "body": {
+        "mimeType": "application/x-www-form-urlencoded",
         "text": "private=false"
       },
       "parameters": [],

@@ -64,7 +64,7 @@ function importMethod (method) {
 }
 
 function importCookieToHeaderString (obj) {
-    return `${obj.name}=${obj.value}`
+  return `${obj.name}=${obj.value}`
 }
 
 function importHeader (obj) {
@@ -81,11 +81,18 @@ function importPostData (obj) {
   }
 
   if (obj.params && obj.params.length) {
-    const params = obj.params.map(p => ({name: p.name, value: p.value}));
-    return {
-      params,
-      mimeType: obj.mimeType || 'application/x-www-form-urlencoded'
-    }
+    const mimeType = obj.mimeType || 'application/x-www-form-urlencoded';
+    const params = obj.params.map(p => {
+      const item = {name: p.name};
+      if (p.fileName) {
+        item.fileName = p.fileName;
+      } else {
+        item.value = p.value || '';
+      }
+      return item;
+    });
+
+    return {params, mimeType};
   } else {
     return {
       mimeType: obj.mimeType || '',

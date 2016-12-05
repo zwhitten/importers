@@ -96,12 +96,20 @@ function importBody (body) {
 }
 
 function importBodyFormdata (formdata) {
-  const params = formdata.map(({key, value, type, enabled}) => ({
-    value,
-    type,
-    name: key,
-    disabled: !enabled,
-  }));
+  const params = formdata.map(({key, value, type, enabled, src}) => {
+    const item = {
+      name: key,
+      disabled: !enabled
+    };
+
+    if (type === 'file') {
+      item.fileName = src;
+    } else {
+      item.value = value;
+    }
+
+    return item;
+  });
 
   return {
     params,

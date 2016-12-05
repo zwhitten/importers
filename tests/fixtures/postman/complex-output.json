@@ -23,9 +23,13 @@
         "params": [
           {
             "disabled": false,
+            "name": "file",
+            "fileName": "/home/user/test.txt"
+          },
+          {
+            "disabled": false,
             "name": "foo",
-            "value": "bar",
-            "type": "text"
+            "value": "bar"
           }
         ]
       },

@@ -27,6 +27,12 @@
               "mode": "formdata",
               "formdata": [
                 {
+                  "key": "file",
+                  "src": "/home/user/test.txt",
+                  "type": "file",
+                  "enabled": true
+                },
+                {
                   "key": "foo",
                   "value": "bar",
                   "type": "text",
