@@ -8,13 +8,20 @@
       "_id": "__GRP_1__",
       "_type": "request_group",
       "parentId": "__WORKSPACE_ID__",
+      "name": "Test Collection",
+      "environment": {}
+    },
+    {
+      "_id": "__GRP_2__",
+      "_type": "request_group",
+      "parentId": "__GRP_1__",
       "name": "First Folder",
       "environment": {}
     },
     {
       "_id": "__REQ_1__",
       "_type": "request",
-      "parentId": "__GRP_1__",
+      "parentId": "__GRP_2__",
       "url": "{{base_url}}/api/users",
       "name": "{{base_url}}/api/users",
       "method": "POST",
@@ -47,7 +54,7 @@
     {
       "_id": "__REQ_2__",
       "_type": "request",
-      "parentId": "__GRP_1__",
+      "parentId": "__GRP_2__",
       "url": "{{base_url}}/api/users",
       "name": "Urlencoded Form Test",
       "method": "POST",
@@ -73,7 +80,7 @@
     {
       "_id": "__REQ_3__",
       "_type": "request",
-      "parentId": "__WORKSPACE_ID__",
+      "parentId": "__GRP_1__",
       "url": "{{base_url}}/api/users",
       "name": "Test Request",
       "method": "POST",
@@ -87,7 +94,7 @@
     {
       "_id": "__REQ_4__",
       "_type": "request",
-      "parentId": "__WORKSPACE_ID__",
+      "parentId": "__GRP_1__",
       "url": "{{base_url}}/api/users",
       "name": "Test Request",
       "method": "POST",

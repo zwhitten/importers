@@ -5,9 +5,16 @@
   "__export_source": "insomnia.importers:v0.1.0",
   "resources": [
     {
+      "_id": "__GRP_1__",
+      "_type": "request_group",
+      "parentId": "__WORKSPACE_ID__",
+      "name": "Test Collection",
+      "environment": {}
+    },
+    {
       "_id": "__REQ_1__",
       "_type": "request",
-      "parentId": "__WORKSPACE_ID__",
+      "parentId": "__GRP_1__",
       "url": "",
       "name": "",
       "method": "GET",

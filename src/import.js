@@ -17,9 +17,9 @@ module.exports.convert = function (contents) {
     if (resources) {
       return {
         type: {
-          id: 'har',
-          name: 'HAR 1.2',
-          description: 'Importer for HTTP Archive 1.2',
+          id: importer.id,
+          name: importer.name,
+          description: importer.description
         },
         data: {
           _type: 'export',

@@ -25,7 +25,16 @@ module.exports.convert = function (rawData) {
 };
 
 function importCollection (collection) {
-  return importItem(collection.item)
+  const collectionFolder = {
+    parentId: '__WORKSPACE_ID__',
+    _id: `__GRP_${requestGroupCount++}__`,
+    _type: 'request_group',
+    name: collection.info.name,
+  };
+  return [
+    collectionFolder,
+    ...importItem(collection.item, collectionFolder._id)
+  ]
 }
 
 function importItem (items, parentId = '__WORKSPACE_ID__') {
