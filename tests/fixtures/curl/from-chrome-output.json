@@ -13,7 +13,12 @@
       "method": "POST",
       "body": {
         "mimeType": "application/x-www-form-urlencoded",
-        "text": "private=false"
+        "params": [
+          {
+            "name": "private",
+            "value": "false"
+          }
+        ]
       },
       "parameters": [],
       "headers": [

@@ -32,6 +32,8 @@ module.exports.convert = function (rawData) {
     if (typeof arg === 'object' && arg.op === ';') {
       commands.push(currentCommand);
       currentCommand = [];
+    } else if (typeof arg === 'object') {
+      // Not sure what this could be, so just skip it
     } else {
       currentCommand.push(arg);
     }
@@ -120,17 +122,19 @@ function importArgs (args) {
   }
 
   // Body (Text or Blob)
-  const textBody = getPairValue(pairs, null, 'd', 'data', 'data-raw', 'data-urlencode', 'data-binary', 'data-ascii');
+  const textBody = getPairValue(
+    pairs, null, 'd', 'data', 'data-raw', 'data-urlencode', 'data-binary', 'data-ascii');
   const contentTypeHeader = headers.find(h => h.name.toLowerCase() === 'content-type');
   const mimeType = contentTypeHeader ? contentTypeHeader.value.split(';')[0] : null;
 
   // Body (Multipart Form Data)
-  const formParams = [
+  const formDataParams = [
     ...(pairs['form'] || []),
     ...(pairs['F'] || [])
   ].map(str => {
     const [name, value] = str.split('=');
     const item = {name};
+
     if (value.indexOf('@') === 0) {
       item.fileName = value.slice(1);
       item.type = 'file';
@@ -143,10 +147,15 @@ function importArgs (args) {
 
   // Body
   let body = mimeType ? {mimeType: mimeType} : {};
-  if (textBody) {
+  if (textBody && mimeType === 'application/x-www-form-urlencoded') {
+    body.params = textBody.split('&').map(v => {
+      const [name, value] = v.split('=');
+      return {name: name || '', value: value || ''};
+    })
+  } else if (textBody) {
     body.text = textBody;
-  } else if (formParams.length) {
-    body.params = formParams;
+  } else if (formDataParams.length) {
+    body.params = formDataParams;
     body.mimeType = mimeType || 'multipart/form-data';
   }
 
