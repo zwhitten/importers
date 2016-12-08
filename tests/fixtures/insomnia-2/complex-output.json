@@ -22,6 +22,7 @@
       "name": "Test Request",
       "method": "POST",
       "body": {
+        "mimeType": "application/json",
         "text": "{\"foo\": \"bar\"}"
       },
       "parameters": [
@@ -37,7 +38,7 @@
       "headers": [
         {
           "name": "Content-Type",
-          "value": "application/json"
+          "value": "application/json; charset=utf-8"
         }
       ],
       "authentication": {

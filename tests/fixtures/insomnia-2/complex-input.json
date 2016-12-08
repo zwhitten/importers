@@ -35,7 +35,7 @@
       "headers": [
         {
           "name": "Content-Type",
-          "value": "application/json"
+          "value": "application/json; charset=utf-8"
         }
       ],
       "authentication": {
