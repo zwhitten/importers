@@ -42,6 +42,30 @@
         "username": "{{ api_key }}",
         "password": ""
       }
+    },
+    {
+      "_id": "__REQ_2__",
+      "_type": "request",
+      "parentId": "__GRP_1__",
+      "url": "{{ base_url }}/users",
+      "name": "Test Request",
+      "method": "POST",
+      "body": "Hello World!",
+      "parameters": [
+        {
+          "name": "testing",
+          "value": "hi 123"
+        },
+        {
+          "name": "testing 2",
+          "value": "hi 456"
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "username": "{{ api_key }}",
+        "password": ""
+      }
     }
   ]
 }
