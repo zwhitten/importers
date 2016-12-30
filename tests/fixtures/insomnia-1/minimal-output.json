@@ -18,9 +18,7 @@
       "url": "",
       "name": "Imported HAR 1",
       "method": "GET",
-      "body": {
-        "text": ""
-      },
+      "body": {},
       "parameters": [],
       "headers": [],
       "authentication": {}

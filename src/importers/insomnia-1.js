@@ -72,9 +72,34 @@ function importRequestItem (item, parentId) {
   }
 
   const headers = item.headers || [];
+  let contentTypeHeader = headers.find(h => h.name.toLowerCase() === 'content-type');
   if (item.__insomnia && item.__insomnia.format) {
     const contentType = FORMAT_MAP[item.__insomnia.format];
-    headers.push({name: 'Content-Type', value: contentType});
+    if (!contentTypeHeader) {
+      contentTypeHeader = {name: 'Content-Type', value: contentType};
+      headers.push(contentTypeHeader);
+    }
+  }
+
+  let body = {};
+  if (contentTypeHeader && (
+      contentTypeHeader.value.match(/^application\/x-www-form-urlencoded/i) ||
+      contentTypeHeader.value.match(/^multipart\/form-encoded/i)
+    )
+  ) {
+    body.mimeType = contentTypeHeader.value.split(';')[0];
+    body.params = (item.body || '').split('&').map(v => {
+      const [name, value] = v.split('=');
+      return {
+        name: decodeURIComponent(name),
+        value: decodeURIComponent(value || '')
+      };
+    })
+  } else if (item.body) {
+    body = {
+      mimeType: FORMAT_MAP[item.__insomnia.format] || '',
+      text: item.body,
+    }
   }
 
   const count = requestCount++;
@@ -85,7 +110,7 @@ function importRequestItem (item, parentId) {
     name: item.name || `Imported HAR ${count}`,
     url: item.url || '',
     method: item.method || 'GET',
-    body: {text: item.body || ''},
+    body: body,
     parameters: item.params || [],
     headers,
     authentication,
