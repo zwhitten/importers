@@ -67,15 +67,21 @@ function importArgs (args) {
     const arg = args[i];
     if (arg.match(/^-{1,2}[\w\-]+/)) {
       const name = arg.replace(/^-{1,2}/, '');
-      const value = args[i + 1];
+
+      let value;
+      if (args[i + 1] && args[i + 1].indexOf('-') !== 0) {
+        // Next arg is not a flag, so assign it as the value
+        value = args[i + 1];
+        i++; // Skip next one
+      } else {
+        value = true;
+      }
 
       if (!pairs[name]) {
         pairs[name] = [value];
       } else {
         pairs[name].push(value);
       }
-
-      i++; // Skip next one
     } else if (arg) {
       singletons.push(arg);
     }

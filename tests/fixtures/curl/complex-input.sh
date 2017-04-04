@@ -1,5 +1,6 @@
 curl \
   --request POST \
+  -i \
   --url http://localhost:8000/api/v1/send \
   --header 'x-custom-header :foo bar' \
   --header 'content-type: application/json' \
